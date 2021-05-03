@@ -7,6 +7,9 @@ gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
 gem 'puma', '~> 5.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'mongoid', '~> 7.0.5'
+gem 'grape-entity'
+gem 'grape'
+gem 'grape_on_rails_routes'
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 
