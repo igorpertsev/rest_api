@@ -1,4 +1,5 @@
 class V1::ContractEntity < Grape::Entity
+  expose :id
   expose :price
   expose :start_date
   expose :end_date

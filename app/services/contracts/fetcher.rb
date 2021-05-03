@@ -1,11 +1,11 @@
 module Contracts
   class Fetcher
-    attr_reader :options
+    attr_reader :options, :customer
     attr_accessor :scope
 
-    def initialize(options: {})
+    def initialize(customer:, options: {})
       @options = options
-      @scope = Contract.all
+      @scope = Contract.where(customer_id: customer.id)
     end
 
     def run

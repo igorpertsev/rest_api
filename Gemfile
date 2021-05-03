@@ -10,6 +10,10 @@ gem 'mongoid', '~> 7.0.5'
 gem 'grape-entity'
 gem 'grape'
 gem 'grape_on_rails_routes'
+gem 'devise'
+gem 'jwt'
+gem 'simple_command'
+
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 # gem 'rack-cors'
 

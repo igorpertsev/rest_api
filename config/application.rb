@@ -27,6 +27,7 @@ module RestApi
     config.paths.add 'app/api', glob: '**/*.rb'
     config.autoload_paths += Dir[Rails.root.join('app', 'api')]
     config.autoload_paths += Dir[Rails.root.join('app', 'services')]
+    config.autoload_paths <<  Rails.root.join("lib")
 
     # Only loads a smaller set of middleware suitable for API only apps.
     # Middleware like session, flash, cookies can be added back manually.
