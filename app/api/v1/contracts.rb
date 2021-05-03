@@ -62,6 +62,12 @@ module V1
         optional :price, type: Integer, desc: 'Contract price in cents'
       end
       patch do 
+        command = ::Contracts::Update.call(@current_customer.id, params.delete(:id), params)
+        if command.success?
+          present command.result, with: ::V1::ContractEntity
+        else 
+          error!('422 Unprocessible', 422)
+        end
       end
 
       desc 'Deletes existing contract for customer.' 
