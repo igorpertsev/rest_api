@@ -60,9 +60,11 @@ module V1
 
       desc 'Deletes existing contract for customer.' 
       params do 
-        requires :id, type: Array, desc: 'Ids of contracts to be removed'
+        requires :ids, type: Array, desc: 'Ids of contracts to be removed'
       end
       delete do 
+        ::Contracts::Delete.call(@current_customer.id, params[:ids])
+        { status: :ok }
       end
     end
   end
