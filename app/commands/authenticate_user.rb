@@ -17,7 +17,12 @@ class AuthenticateUser
   def api_customer
     @api_customer ||= begin
       user = Customer.where(email: email).first
-      user.present? && user.valid_password?(password) ? user : nil
+      if user.present? && user.valid_password?(password) 
+        user
+      else 
+        errors.add :message, "Invalid email / password"
+        nil
+      end
     end
   end
 end

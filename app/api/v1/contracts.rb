@@ -37,7 +37,13 @@ module V1
         requires :start_date, type: DateTime, desc: 'Start date for contract'
         requires :price, type: Integer, desc: 'Contract price in cents'
       end
-      post do 
+      post do
+        command = ::Contracts::Create.call(@current_customer.id, params)
+        if command.success?
+          present command.result, with: ::V1::ContractEntity
+        else 
+          error!('422 Unprocessible', 422)
+        end
       end
 
       desc 'Bulk create of new contracts for customer.' 

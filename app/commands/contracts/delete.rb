@@ -4,7 +4,7 @@ module Contracts
     
     def initialize(customer_id, contract_ids)
       @customer_id = customer_id
-      @contract_ids = contract_ids
+      @contract_ids = Array.wrap(contract_ids)
     end
     
     def call
