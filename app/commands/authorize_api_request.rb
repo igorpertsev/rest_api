@@ -6,7 +6,11 @@ class AuthorizeAPIRequest
   end
   
   def call
-    decoded_auth_token ? Customer.find(decoded_auth_token[:customer_id]) : nil
+    if decoded_auth_token && decoded_auth_token[:expiry] > Time.current.to_i 
+      Customer.find(decoded_auth_token[:customer_id])
+    else 
+      nil
+    end
   end
   
   private

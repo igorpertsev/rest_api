@@ -9,11 +9,7 @@ module Contracts
     
     def call
       contract = ::Contract.new(parameters.merge(customer_id: customer_id))
-      if contract.valid? 
-        contract.save!
-      else 
-        errors.add :message, contract.errors
-      end
+      contract.valid? ? contract.save! : contract.errors.each { |error| errors.add(:message, error) }
       contract
     end
     

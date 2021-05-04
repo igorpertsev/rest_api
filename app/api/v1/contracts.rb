@@ -48,9 +48,12 @@ module V1
 
       desc 'Bulk create of new contracts for customer.' 
       params do 
-        requires :options, type: Array, desc: 'List of new contracts data. Should include all fields from :create action'
+        requires :contracts, type: Array, desc: 'List of new contracts data. Each line should include all fields from :create action'
       end
-      post do 
+      post :import do 
+        job_id = SecureRandom.hex(10)
+        BulkImportJob.perform_later(job_id, @current_customer.id.to_s, params[:contracts])
+        { job_id: job_id, status: :enqueued }
       end
 
       desc 'Updates existing contract for customer.' 
