@@ -10,7 +10,7 @@ module V1
 
         def authenticate_request
           @current_customer = ::AuthorizeAPIRequest.call(request.headers).result
-        
+         
           error!('401 Unauthorized', 401) unless @current_customer
         end
       end
@@ -61,7 +61,8 @@ module V1
         failure [[401, 'Unauthorized customer']]
       end
       params do 
-        requires :contracts, type: Array, desc: 'List of new contracts data. Each line should include all fields from :create action'
+        requires :contracts, type: Array[Hash], desc: 'List of new contracts data. Each line should include all fields from :create action',
+          coerce_with: ->(val) { val.is_a?(Array) ? val : JSON.parse(val) }
       end
       post :import do 
         job_id = SecureRandom.hex(10)
@@ -97,7 +98,8 @@ module V1
         failure [[401, 'Unauthorized customer']]
       end 
       params do 
-        requires :ids, type: Array, desc: 'Ids of contracts to be removed'
+        requires :ids, type: Array[String], desc: 'Ids of contracts to be removed',
+          coerce_with: -> (val) { (val.is_a?(Array) ? val : val.to_s.split(',').map(&:strip)) }
       end
       delete do 
         ::Contracts::Delete.call(@current_customer.id, params[:ids])

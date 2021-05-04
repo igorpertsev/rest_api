@@ -340,7 +340,6 @@ RSpec.describe ::V1::Imports do
         post '/api/contracts', params: {}, headers: { 'Authorization' => "Bearer #{token}" }
 
         json_body = JSON.parse(response.body)
-        byebug
 
         aggregate_failures do 
           expect(response.status).to eq(400)
@@ -419,7 +418,7 @@ RSpec.describe ::V1::Imports do
         json_body = JSON.parse(response.body)
         aggregate_failures do 
           expect(response.status).to eq(400)
-          expect(json_body['error']).to eq('contracts is missing')
+          expect(json_body['error']).to eq('contracts is missing, contracts is invalid')
         end
       end
     end

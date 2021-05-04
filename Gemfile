@@ -23,7 +23,7 @@ gem 'mongoid_rails_migrations'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
-
+gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug'
