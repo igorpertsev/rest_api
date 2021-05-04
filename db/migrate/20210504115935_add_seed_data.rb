@@ -11,9 +11,9 @@ class AddSeedData < Mongoid::Migration
         customer_id: customer.id)
     end
 
-    5.times do 
+    5.times do |ind|
       customer = Customer.where(name: Faker::Name.name , address: Faker::Address.full_address, 
-        password: '123qweASD', email: Faker::Internet.email).first_or_create
+        password: '123qweASD', email: "test#{ind}@test.com").first_or_create
       10.times do 
         Contract.create(price: Faker::Number.number(digits: 5), 
           start_date: Faker::Time.between(from: 10.days.ago, to: 10.days.since),

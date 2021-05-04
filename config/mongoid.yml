@@ -3,7 +3,7 @@ development:
     default:
       database: rest_api_development
       hosts:
-        - localhost:27017
+        - mongo-service
       options:
         # Note that all options listed below are Ruby driver client options (the mongo gem).
         # Please refer to the driver documentation of the version of the mongo gem you are using
