@@ -11,11 +11,12 @@ module Contracts
     def call
       contract = ::Contract.where(customer_id: customer_id, id: contract_id).first
       if contract.present?
-        contract.update_attributes(options.slice(:start_date, :end_date, :expiry_date, :price))
+        contract.attributes = options.slice(:start_date, :end_date, :expiry_date, :price)
         if contract.valid?
           contract.save!
         else
-          errors.add :message, 'Not valid'
+          contract.errors.full_messages.each { |x| errors.add :message, x }
+          contract.reload
         end  
       else
         errors.add :message, 'Not found'

@@ -23,13 +23,13 @@ module V1
         produces ['application/json']
         consumes ['application/json']
         success ::V1::ActiveJobStatusEntity.documentation
-        failure [[401, 'Unauthorized']]
+        failure [[401, 'Unauthorized'], [400, 'Bad request']]
       end
       params do
         requires :job_id, type: String
       end
-      post do
-        command = JobStatus::Fetch.call(current_customer.id, params[:job_id])
+      get do
+        command = JobStatus::Fetch.call(params[:job_id])
         present command.result, with: ::V1::ActiveJobStatusEntity
       end
     end

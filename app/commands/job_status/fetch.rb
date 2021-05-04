@@ -2,8 +2,7 @@ module JobStatus
   class Fetch
     prepend SimpleCommand
     
-    def initialize(customer_id, job_id)
-      @customer_id = customer_id
+    def initialize(job_id)
       @job_id = job_id
     end
     
@@ -13,6 +12,6 @@ module JobStatus
     
     private
     
-    attr_accessor :customer_id, :job_id
+    attr_accessor :job_id
   end
 end

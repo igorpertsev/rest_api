@@ -6,7 +6,7 @@ module V1
       desc 'Authenticate customer.' do 
         produces ['application/json']
         consumes ['application/json']
-        failure [[401, 'Unauthorized']]
+        failure [[401, 'Unauthorized'], [400, 'Bad request']]
       end
       params do
         requires :email, type: String

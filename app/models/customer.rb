@@ -9,4 +9,7 @@ class Customer
   field :email, type: String
 
   has_many :contracts
+
+  validates_presence_of :email, :name
+  validates_uniqueness_of :name
 end

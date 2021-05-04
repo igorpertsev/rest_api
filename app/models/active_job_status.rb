@@ -5,4 +5,6 @@ class ActiveJobStatus
   field :fail_reasons, type: Array, default: []
   field :successful_count, type: Integer, default: 0
   field :job_id, type: String
+
+  validates :job_id, presence: true, uniqueness: true
 end
