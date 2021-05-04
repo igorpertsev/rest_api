@@ -19,7 +19,12 @@ module V1
         authenticate_request
       end
 
-      desc 'Return status of import job.'
+      desc 'Return status of import job.' do
+        produces ['application/json']
+        consumes ['application/json']
+        success ::V1::ActiveJobStatusEntity.documentation
+        failure [[401, 'Unauthorized']]
+      end
       params do
         requires :job_id, type: String
       end

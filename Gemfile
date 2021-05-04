@@ -13,9 +13,17 @@ gem 'grape_on_rails_routes'
 gem 'devise'
 gem 'jwt'
 gem 'simple_command'
+gem 'grape-swagger'
+gem 'grape-swagger-rails'
+gem 'grape-swagger-entity', '~> 0.3'
+gem 'grape-swagger-representable', '~> 0.2'
+gem 'rack-cors'
+gem 'mongoid_rails_migrations'
 
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem 'rack-cors'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+
 
 group :development, :test do
   gem 'byebug'

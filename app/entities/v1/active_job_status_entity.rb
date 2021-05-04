@@ -8,7 +8,7 @@ class V1::ActiveJobStatusEntity < Grape::Entity
       'failed'
     end
   end
-  expose :fail_reasons
-  expose :successful_count
-  expose :job_id
+  expose :fail_reasons, documentation: { type: 'Array', desc: 'List of errors on import' }
+  expose :successful_count, documentation: { type: 'Integer', desc: 'Amount of successfuly imported items' }
+  expose :job_id, documentation: { type: 'String', desc: 'Job ID' }
 end

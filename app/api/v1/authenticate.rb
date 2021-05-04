@@ -3,7 +3,11 @@ module V1
     format :json
 
     namespace :auth do
-      desc 'Authenticate customer.'
+      desc 'Authenticate customer.' do 
+        produces ['application/json']
+        consumes ['application/json']
+        failure [[401, 'Unauthorized']]
+      end
       params do
         requires :email, type: String
         requires :password, type: String

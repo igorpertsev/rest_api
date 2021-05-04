@@ -19,7 +19,11 @@ module V1
         authenticate_request
       end
 
-      desc 'Returns a list of contracts with filtering for customer.'
+      desc 'Returns a list of contracts with filtering for customer.' do
+        produces ['application/json']
+        consumes ['application/json']
+        failure [[401, 'Unauthorized customer']]
+      end
       params do
         optional :end_date, type: Hash, desc: 'Filter description for end_date field'
         optional :expiry_date, type: Hash, desc: 'Filter description for expiry_date field'
@@ -30,7 +34,12 @@ module V1
         present ::Contracts::Fetcher.new(customer: current_customer, options: params).run, with: ::V1::ContractEntity
       end
 
-      desc 'Creates new contract for customer.' 
+      desc 'Creates new contract for customer.' do
+        produces ['application/json']
+        consumes ['application/json']
+        success ::V1::ContractEntity.documentation
+        failure [[401, 'Unauthorized customer'], [422, 'Unprocessible entity']]
+      end
       params do 
         requires :end_date, type: DateTime, desc: 'End date for contract'
         requires :expiry_date, type: DateTime, desc: 'Expiry date for contract'
@@ -46,7 +55,11 @@ module V1
         end
       end
 
-      desc 'Bulk create of new contracts for customer.' 
+      desc 'Bulk create of new contracts for customer.' do
+        produces ['application/json']
+        consumes ['application/json']
+        failure [[401, 'Unauthorized customer']]
+      end
       params do 
         requires :contracts, type: Array, desc: 'List of new contracts data. Each line should include all fields from :create action'
       end
@@ -56,7 +69,12 @@ module V1
         { job_id: job_id, status: :enqueued }
       end
 
-      desc 'Updates existing contract for customer.' 
+      desc 'Updates existing contract for customer.' do
+        produces ['application/json']
+        consumes ['application/json']
+        success ::V1::ContractEntity.documentation
+        failure [[401, 'Unauthorized customer'], [422, 'Unprocessible entity']]
+      end
       params do 
         requires :id, type: String, desc: 'Contract ID'
         optional :end_date, type: DateTime, desc: 'End date for contract'
@@ -73,7 +91,11 @@ module V1
         end
       end
 
-      desc 'Deletes existing contract for customer.' 
+      desc 'Deletes existing contract for customer.' do
+        produces ['application/json']
+        consumes ['application/json']
+        failure [[401, 'Unauthorized customer']]
+      end 
       params do 
         requires :ids, type: Array, desc: 'Ids of contracts to be removed'
       end
