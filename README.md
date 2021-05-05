@@ -2,6 +2,9 @@
 
 This application provides ability for customers to create/update/fetch contracts. Access to contracts is restricted based on customer.
 
+# Example application
+Application was successfuly deployed to Heroku. It can be found here `https://young-river-07241.herokuapp.com/documentation`
+
 # Running application
 
 This application contains docker configuration that can be used to successfuly run it as Docker image. To do so please do following:
