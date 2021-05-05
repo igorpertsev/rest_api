@@ -1,24 +1,49 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application provides ability for customers to create/update/fetch contracts. Access to contracts is restricted based on customer.
 
-Things you may want to cover:
+# Running application
 
-* Ruby version
+This application contains docker configuration that can be used to successfuly run it as Docker image. To do so please do following:
+1) Build image on your machine. It can be done by running
+  `docker-compose build`
+  
+2) After building application please run migrations and seeds. It can be done by runing
+  `docker-compose run app rake db:migrate`
+  
+  This step will create all test customers and fake contracts. Also additional customer will be created for Swagger UI. For details on created users please reffer to migration files. 
+  
+3)  After running migrations please start docker image by running
+  `docker-compose up`
+  
+  This step will start all required containers, namely mongo service, redis instance, sidekiq instance and actual web application. After this REST api can be found under `http://localhost:3000`
+  
+# Documentation
 
-* System dependencies
+Swagger documentation generated for this API. It can be found under `http://localhost:3000/documetation`
 
-* Configuration
+# Search functionality 
 
-* Database creation
+`GET api/contracts` endpoint also provides option to filter contracts based on passed parameters. In order to do so please add parameters to your request like this:
+`
+    {
+      price: {
+        c: 'gt',
+        v: <value>
+      },
+      start_date: {
+        c: 'lt',
+        v: <value>
+      },
+      end_date: {
+        c: 'lte',
+        v: <value>
+      },
+      expiry_date: {
+        c: 'eq',
+        v: <value>
+      }
+    }
+`
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Each filter type should include 2 parameters (c for comparer and v for value). For comparer possible values are `gt`, `lt`, `gte`, `lte`, `eq`. Value should be set according expected types (Integer for price or DateTime for other fields).
