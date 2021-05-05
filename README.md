@@ -18,6 +18,8 @@ This application contains docker configuration that can be used to successfuly r
   
   This step will start all required containers, namely mongo service, redis instance, sidekiq instance and actual web application. After this REST api can be found under `http://localhost:3000`
   
+  Please note, that application is configured to use Docker image of mongo DB and will not work properly if it's not running. If you want to use local instance, please update configuration in `config/mongoid.yml` file.
+  
 # Documentation
 
 Swagger documentation generated for this API. It can be found under `http://localhost:3000/documetation`
