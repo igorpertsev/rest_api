@@ -156,3 +156,13 @@ test:
         read:
           mode: :primary
         max_pool_size: 1
+
+production:
+  clients:
+    default:
+      database: <%= ENV['DB_NAME'] %>
+      hosts:
+        <%= ENV['DB_URL'] %>
+      options:
+        user: <%= ENV['DB_USER'] %> 
+        password: <%= ENV['DB_PASSWORD'] %>

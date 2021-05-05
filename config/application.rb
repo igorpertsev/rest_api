@@ -35,5 +35,6 @@ module RestApi
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
     config.active_job.queue_adapter = :sidekiq
+    config.hosts << "young-river-07241.herokuapp.com"
   end
 end

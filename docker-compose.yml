@@ -18,7 +18,9 @@ services:
     depends_on:
       - mongo-service
       - redis
+      - sidekiq
     environment:
+      - RAILS_ENV=production
       - REDIS_URL=redis://redis:6379/
   sidekiq:
     depends_on:
