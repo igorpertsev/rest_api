@@ -25,10 +25,26 @@ module V1
         failure [[401, 'Unauthorized customer']]
       end
       params do
-        optional :end_date, type: Hash, desc: 'Filter description for end_date field'
-        optional :expiry_date, type: Hash, desc: 'Filter description for expiry_date field'
-        optional :start_date, type: Hash, desc: 'Filter description for start_date field'
-        optional :price, type: Hash, desc: 'Filter description for price field'
+        optional :end_date, type: Hash, desc: 'Filter description for end_date field' do 
+          optional :c, type: String, values: ::Contracts::Filters::Base::COMPARATORS, desc: 'Compare operation used for filtering'
+          optional :v, type: DateTime, desc: 'Value used for filtering'
+          all_or_none_of :c, :v
+        end
+        optional :expiry_date, type: Hash, desc: 'Filter description for expiry_date field' do 
+          optional :c, type: String, values: ::Contracts::Filters::Base::COMPARATORS, desc: 'Compare operation used for filtering'
+          optional :v, type: DateTime, desc: 'Value used for filtering'
+          all_or_none_of :c, :v
+        end
+        optional :start_date, type: Hash, desc: 'Filter description for start_date field' do 
+          optional :c, type: String, values: ::Contracts::Filters::Base::COMPARATORS, desc: 'Compare operation used for filtering'
+          optional :v, type: DateTime, desc: 'Value used for filtering'
+          all_or_none_of :c, :v
+        end
+        optional :price, type: Hash, desc: 'Filter description for price field' do 
+          optional :c, type: String, values: ::Contracts::Filters::Base::COMPARATORS, desc: 'Compare operation used for filtering'
+          optional :v, type: Integer, desc: 'Value used for filtering'
+          all_or_none_of :c, :v
+        end
       end
       get do
         present ::Contracts::Fetcher.new(customer: current_customer, options: params).run, with: ::V1::ContractEntity
